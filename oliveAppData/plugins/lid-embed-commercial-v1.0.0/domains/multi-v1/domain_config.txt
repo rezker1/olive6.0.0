@@ -1,0 +1,54 @@
+# Use this file to enable or disable languages built-in to the plugin. This does not impact user-enrolled languages
+#Albanian
+Amharic
+#Azerbaijani
+#Belarusian
+#Bengali
+#Bosnian
+#Bulgarian
+#Burmese
+#Cantonese
+#Cebuano
+#Croatian
+English
+French
+#Georgian
+#German
+#Greek
+#Haitian
+#Hausa
+#Hindi
+#Indonesian
+Iranian Persian
+#Italian
+Japanese
+#Khmer
+Korean
+#Iraqi Arabic
+Modern Standard Arabic
+#Macedonian
+Mandarin
+#Min Nan
+#Ndebele
+#Oromo
+#Panjabi
+Pashto
+Portuguese
+#Romanian
+Russian
+#Serbian
+#Shona
+#Somali
+Spanish
+#Swahili
+Tagalog
+#Tamil
+#Thai
+#Tibetan
+#Tigrinya
+#Tunisian Arabic
+#Turkish
+#Ukrainian
+#Uzbek
+Vietnamese
+#Wu

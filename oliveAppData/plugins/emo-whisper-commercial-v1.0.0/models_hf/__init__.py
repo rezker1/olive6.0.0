@@ -1,0 +1,7 @@
+from transformers import AutoConfig, AutoModelForAudioXVector
+from transformers.models.whisper.configuration_whisper import WhisperConfig
+from models_hf.whisper import WhisperEncoderAvgPool, WhisperEncoderAvgPoolConfig
+
+AutoConfig.register("WhisperEncoderAvgPool", WhisperEncoderAvgPoolConfig)
+AutoModelForAudioXVector.register(WhisperEncoderAvgPoolConfig, WhisperEncoderAvgPool)
+

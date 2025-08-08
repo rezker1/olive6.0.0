@@ -1,0 +1,1 @@
+*.{wav,npz,h5,pickle,npy,gmm,gmms,arch,sph,mdl,bin,fst,pdf,gz,pt} filter=lfs diff=lfs merge=lfs -text

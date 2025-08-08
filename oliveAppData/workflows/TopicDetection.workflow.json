@@ -1,0 +1,36 @@
+{
+ "order": [
+  {
+   "workflow_type": "WORKFLOW_ANALYSIS_TYPE",
+   "job_definition": [
+    {
+     "job_name": "Topic Detection Analysis Workflow",
+     "tasks": [
+      {
+       "message_type": "REGION_SCORER_REQUEST",
+       "message_data": {
+        "plugin": "tpd-dynapy-commercial-v1.0.0",
+        "domain": "eng-tel-v1"
+       },
+       "trait_output": "REGION_SCORER",
+       "task": "TPD",
+       "consumer_data_label": "audio",
+       "consumer_result_label": "TPD",
+       "return_result": true,
+       "description": "Topic Detection"
+      }
+     ],
+     "data_properties": {
+      "min_number_inputs": 1,
+      "max_number_inputs": 1,
+      "type": "AUDIO",
+      "preprocessing_required": true,
+      "resample_rate": 8000,
+      "mode": "MONO"
+     }
+    }
+   ]
+  }
+ ],
+ "actualized": false
+}

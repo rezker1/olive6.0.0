@@ -1,0 +1,147 @@
+{
+ "order": [
+  {
+   "workflow_type": "WORKFLOW_ANALYSIS_TYPE",
+   "job_definition": [
+    {
+     "job_name": "Smart Transcription (end2end)",
+     "tasks": [
+      {
+       "message_type": "REGION_SCORER_REQUEST",
+       "message_data": {
+        "plugin": "sad-dnn-commercial-v1.0.0",
+        "domain": "multi-v1"
+       },
+       "trait_output": "REGION_SCORER",
+       "task": "SAD",
+       "consumer_data_label": "audio",
+       "consumer_result_label": "SAD_REGIONS",
+       "return_result": true,
+       "description": "Speech Activity Detection"
+      },
+      {
+       "message_type": "REGION_SCORER_REQUEST",
+       "message_data": {
+        "plugin": "ldd-embed-commercial-v1.0.0",
+        "domain": "multi-v1"
+       },
+       "trait_output": "REGION_SCORER",
+       "task": "LDD",
+       "consumer_data_label": "audio",
+       "consumer_result_label": "LDD",
+       "return_result": true,
+       "allow_failure": false,
+       "description": "Language Detection"
+      },
+      {
+       "message_type": "REGION_SCORER_REQUEST",
+       "message_data": {
+        "plugin": "sdd-diarize-commercial-v1.0.0",
+        "domain": "multi-v1"
+       },
+       "trait_output": "REGION_SCORER",
+       "task": "SDD",
+       "consumer_data_label": "audio",
+       "consumer_result_label": "SDD",
+       "return_result": true,
+       "allow_failure": false,
+       "description": "Speaker Diarization and Detection"
+      },
+      {
+       "message_type": "PLUGIN_2_PLUGIN_REQUEST",
+       "message_data": {
+        "plugin": "map-routerRegion-v1.1.1",
+        "domain": "default-mapless-v1",
+        "option":
+                [{
+                        "name": "mapping",
+                        "value": "[ {\"English\": (\"asr-end2end-commercial-v1.0.0\", \"english-augmented-v1\")}]"
+                }]
+       },
+       "trait_output": "PLUGIN_2_PLUGIN",
+       "task": "DYNAMIC_ASR",
+       "consumer_data_label": "scores",
+       "consumer_result_label": "CONDITIONAL_ASR",
+       "return_result": false,
+       "option_mappings": [
+        {
+         "workflow_keyword_name": "LDD",
+         "plugin_keyword_name": "scores"
+        },
+        {
+         "workflow_keyword_name": "SDD",
+         "plugin_keyword_name": "sdd_scores"
+        }
+       ],
+       "allow_failure": false,
+       "description": "ASR Conditional Task Composer"
+      }
+     ],
+     "data_properties": {
+      "min_number_inputs": 1,
+      "max_number_inputs": 1,
+      "type": "AUDIO",
+      "preprocessing_required": true,
+      "resample_rate": 0,
+      "mode": "MONO"
+     },
+     "description": "SAD, LDD, SDD, WITH Conditional ASR Processing",
+     "processing_type": "SEQUENTIAL",
+     "conditional_job_output": true,
+     "transfer_result_labels": [
+      "audio",
+      "CONDITIONAL_ASR"
+     ]
+    },
+    {
+     "job_name": "Dynamic ASR",
+     "tasks": [
+      {
+       "message_type": "DYNAMIC_PLUGIN_REQUEST",
+       "message_data": {
+        "conditional_task_name": "CONDITIONAL_ASR"
+       },
+       "trait_output": "REGION_SCORER",
+       "task": "ASR",
+       "consumer_data_label": "audio",
+       "consumer_result_label": "ASR",
+       "return_result": true,
+       "description": "Dynamic ASR Task"
+      }
+     ],
+     "data_properties": {
+      "min_number_inputs": 1,
+      "max_number_inputs": 1,
+      "type": "AUDIO",
+      "preprocessing_required": true,
+      "resample_rate": 0,
+      "mode": "MONO"
+     },
+     "description": "Test dynamic selection of the ASR plugin/domain using LDD and SDD results",
+     "processing_type": "SEQUENTIAL",
+     "dynamic_job_name": ["Smart Transcription (end2end)"]
+    }
+   ],
+   "order_name": "Analysis Order"
+  }
+
+ 
+
+
+
+ ],
+
+
+
+
+
+ "actualized": false,
+ "created": {
+  "year": 2021,
+  "month": 6,
+  "day": 29,
+  "hour": 8,
+  "min": 0,
+  "sec": 0
+ }
+}

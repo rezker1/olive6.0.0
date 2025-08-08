@@ -1,0 +1,10 @@
+# Use this file to enable or disable emotion-dataset pairs built-in to the plugin. This does not impact user-enrolled emotions
+angry
+disgust
+fear
+happy
+neutral
+other
+sad
+surprise
+tired

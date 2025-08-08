@@ -1,0 +1,42 @@
+{
+ "order": [
+  {
+   "workflow_type": "WORKFLOW_ANALYSIS_TYPE",
+   "job_definition": [
+    {
+     "job_name": "Face Recognition Using an Image",
+     "tasks": [
+      {
+       "message_type": "BOUNDING_BOX_REQUEST",
+       "message_data": {
+        "plugin": "fri-pyembed-commercial-v1.0.0",
+        "domain": "multi-v1"
+       },
+       "trait_output": "BOUNDING_BOX_SCORER",
+       "task": "FRI",
+       "consumer_data_label": "data",
+       "consumer_result_label": "FRI",
+       "return_result": true,
+       "option_mappings": [
+        {
+         "workflow_keyword_name": "image",
+         "plugin_keyword_name": "data"
+        }
+       ],
+       "allow_failure": false
+      }
+     ],
+     "data_properties": {
+      "min_number_inputs": 1,
+      "max_number_inputs": 1,
+      "type": "IMAGE",
+      "preprocessing_required": true
+     },
+     "description": "FRI Processing"
+    }
+   ],
+   "order_name": "Analysis Order"
+  }
+ ],
+ "actualized": false
+}

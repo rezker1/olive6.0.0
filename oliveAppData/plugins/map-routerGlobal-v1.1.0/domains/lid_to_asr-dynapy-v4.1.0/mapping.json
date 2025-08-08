@@ -1,0 +1,10 @@
+{"English": ["asr-dynapy-v4.1.0", "english-tdnnLookaheadRnnlm-tel-v2"],
+  "MandarinChinese": ["asr-dynapy-v4.1.0", "mandarin-tdnnLookaheadRnnlm-tel-v1"],
+  "Persian": ["asr-dynapy-v4.1.0", "farsi-tdnnLookaheadRnnlm-tel-v1"],
+  "Russian": ["asr-dynapy-v4.1.0", "russian-tdnnLookaheadRnnlm-tel-v1"],
+  "Spanish": ["asr-dynapy-v4.1.0", "spanish-tdnnLookaheadRnnlm-tel-v1"],
+  "French": ["asr-dynapy-v4.1.0", "french-tdnnLookaheadRnnlm-tel-v1"],
+  "Pashto": ["asr-dynapy-v4.1.0", "pashto-tdnnLookaheadRnnlm-tel-v1"],
+  "Arabic": ["asr-dynapy-v4.1.0", "levantineArabic-tdnnLookaheadRnnlm-tel-v1"],
+  "Korean": ["asr-dynapy-v4.1.0", "korean-tdnnLookahead-tel-v1"]
+}

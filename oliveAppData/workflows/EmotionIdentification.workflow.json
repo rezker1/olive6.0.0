@@ -1,0 +1,37 @@
+{
+    "order": [
+     {
+      "workflow_type": "WORKFLOW_ANALYSIS_TYPE",
+      "job_definition": [
+       {
+        "job_name": "Emotion Identification Workflow",
+        "tasks": [
+         {
+          "message_type": "GLOBAL_SCORER_REQUEST",
+          "message_data": {
+           "plugin": "emo-whisper-commercial-v1.0.0",
+           "domain": "embed-v1"
+          },
+          "trait_output": "GLOBAL_SCORER",
+          "task": "EMO",
+          "consumer_data_label": "audio",
+          "consumer_result_label": "Emotion",
+          "return_result": true,
+          "description": "Emotion Identification"
+        }
+        ],
+        "data_properties": {
+         "min_number_inputs": 1,
+         "max_number_inputs": 1,
+         "type": "AUDIO",
+         "preprocessing_required": true,
+         "resample_rate": 8000,
+         "mode": "MONO"
+        }
+       }
+      ]
+     }
+    ],
+    "actualized": false
+   }
+   

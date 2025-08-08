@@ -1,0 +1,389 @@
+
+var.DYNASPEAK_HOME              ${PARAMFILE_PATH}
+var.DYNASPEAK_MODELS            ${DYNASPEAK_HOME}/Dynaspeak_models
+
+## These are the acoustic models
+data.Phones                     ${DYNASPEAK_MODELS}/models.Phones
+data.States                     ${DYNASPEAK_MODELS}/models.States
+data.Mixtures                   ${DYNASPEAK_MODELS}/models.Mixtures
+data.Genones                    ${DYNASPEAK_MODELS}/models.Genones
+data.Gaussians                  ${DYNASPEAK_MODELS}/models.Gaussians
+#data.Models                     ${DYNASPEAK_MODELS}/models.Models
+data.UseFloatGaussians          false 
+
+## These are front-end stuff
+audio.SamplingRate              8000
+### XXX
+fe.DeltaFrameDifference         0
+fe.DeltaDeltaFrameDifference    0
+fe.DeltaDeltaDeltaFrameDifference                0
+fe.AdaptMeanCepstrum            true
+fe.RemoveMeanCepstrum           TRUE
+rec.EnableGrammarBacktrace      false
+fe.InitialMaxC0                 1000
+fe.FloatFrontEnd                true
+# is this used?
+#DEPRECATED RastaTimeConstant 0.999000
+fe.WindowSize                   205
+fe.FrameAdvance                 80
+fe.FftSize                      256
+fe.Preemphasis                  -1.052632
+fe.NumFilters                   40 
+fe.BandwidthScale               0.9
+fe.MinFrequency                 100
+fe.MaxFrequency                 3760
+fe.WarpConstant                 0.2
+fe.TrapezoidalRatio             0.0
+fe.NumCepstrum                  13
+fe.NumCacheFrames               3000
+#DEPRECATED NumFeatures 52
+fe.AdaptFeatureNormalization    FALSE
+
+# num_filters is the size of the filterbank array
+fe.NumFiltersNN         40
+fe.BandwidthScaleNN     0.9
+# where the filterbank should start
+fe.MinFrequencyNN       100
+# where the filterbank should end
+fe.MaxFrequencyNN       3760 
+# the range of mel_filters_warp_const is [-1.0 1.0]
+# a larger number means that there is more low frequency resolution.
+# a value of 0.0 -> no warping (linear filterbank)
+fe.WarpConstantNN       0.2
+# this controls the shape of each filter
+# 1 -> square filter
+# 0 -> triangle filter
+fe.TrapezoidalRatioNN   0.0
+
+
+## Endpointing params
+#Disable energy endpointing
+ep.UseEndpointer			FALSE
+ep.StartPadLength               0.4
+ep.StartDetectionLength         0.25
+ep.EndDetectionLength           1.00
+ep.StartTimeout                 5
+ep.EndTimeout                   20
+ep.StartEnergyThreshold         10
+ep.EndEnergyThreshold           20
+#rec.EpStartSilenceThreshold		      30
+#rec.EpStartBackup			      10
+#rec.EpEndSilenceDuration		      20
+
+rec.EpHoldToTalkGuardSeconds    0.5
+
+#HMM Endpointer params
+rec.EndpointWithHMM		        FALSE 
+rec.EpEndpointerMode			CONTINUOUS
+data.GrammarsEP				${DYNASPEAK_MODELS}/ep.Grammars
+data.WordsEP				${DYNASPEAK_MODELS}/ep.Words
+data.ModelsEP				${DYNASPEAK_MODELS}/ep.Models
+rec.EpGrammar                           EP_r4
+rec.EpStartBackup                       10
+rec.EpTimeoutSecondsStartOfSpeech       0
+rec.EpTimeoutSecondsEndOfSpeech         0
+# Turn on BestWord
+rec.EpStartSpeechDuration               10
+# Use 30 to do EOS detection:
+rec.EpEndSilenceDuration                0
+# Turn off Array
+rec.EpStartSpeechNumFrames		0
+rec.EpStartSpeechBufferSize		0
+rec.EpEndSilenceNumFrames		0
+rec.EpEndSilenceBufferSize		0
+# Turn off EndPred
+rec.EpStartingDuration                  0
+rec.EpEndingDuration                    0
+
+## Padding
+fe.EnablePadEndSilence          true
+fe.PadEndSilenceMillis          150
+
+## Settings for fMPE
+fe.DofMPE                       false
+
+
+## decoding parameters
+rec.InitialBacktrace            65534
+rec.GaussianBeamwidth           250000
+rec.GenoneBeamwidth             20000
+#Change the active states when using state graph
+rec.ModelProbabilityWeight      1
+rec.WordProbabilityWeight       1
+#change along with beamwidth when not using state graph
+rec.MaxActiveWords              4000
+rec.MaxActiveGrammars           400
+fe.DecayWeight                  0.95
+rec.PrintAlignment              true
+rec.SaveAlignment             true
+rec.PrintPhoneAlignment              TRUE
+rec.PrintStateAlignment              TRUE
+#rec.NBestSearchLocalN           10
+###rec.NBestBeamwidth              1000
+###rec.NBestMode                   LATTICE
+###rec.MaxNBestHyps                10
+rec.RejectWord                  @reject@
+####rec.RejectWeight                0
+#rec.EnableConfidence            TRUE
+# 8k used 48?
+#rec.AdaptationConfidenceThreshold 55
+rec.ConfidenceBias              -20
+rec.ConfidenceSigmoidSlope      20
+
+
+# It's more accurate to use rec.SumProbs true, but slower.
+# If false, it uses just 1 gaussian, the strongest one.
+rec.SumProbs                    true
+#HTKLatticeFile                  HTK-EN.tmp
+rec.CachedFrames 1
+rec.CacheAhead 1
+rec.CacheGenones                false
+
+#### xyz
+
+fe.CepstrumNormalization        dynamicCMS
+
+
+## These are the input grammar files
+# The first-pass grammar used
+
+# the rescoring LM used.
+rsc.OTFRescore		false
+
+
+## These are the tunable parameters
+#Lattice pruning to avoid delay in decoding
+#rsc.PosteriorPruneThreshold  1e-4
+#rsc.DensityPruneThreshold 100
+rec.RejectWeight                0
+
+# this contrains the memory usage and speed
+### FAST rec.MaxActiveStates 2000
+### SLOW rec.MaxActiveStates 8000
+rec.MaxActiveStates             2000
+# this controls pruning - compare to decipher fw_prune - but needs smaller value
+### FAST rec.Beamwidth                   620
+### SLOW rec.Beamwidth                   1000
+rec.Beamwidth                   620
+# this is lm_weight
+rec.GrammarProbabilityWeight    8
+# word insertion pernalty
+rec.WordTransitionWeight        0
+# is decipher it's called gw_weight
+GaussianWeight 0.6
+# lattice beamwidth - it affects the size of lattice and quality of rescoring
+### FAST rec.HTKLatticeBeam     1000
+### SLOW rec.HTKLatticeBeam     1500
+### CONSIDER rec.HTKLatticeBeam 800
+rec.HTKLatticeBeam              1000
+
+# These 2 params are for the rescoring LM.
+rsc.RescoreLMWeight 10
+rsc.RescoreWTWeight      0
+
+# Use Adaptation
+# fe.MLLRSettings                1 39 200 1 1000 2000 DEFAULT
+
+rec.CustomTimer                 false
+
+# needed for Confidence
+#rec.NBestBeamwidth              3000
+#rec.NBestMode                   LATTICE
+#rec.EnableConfidence            TRUE
+#rec.ConfidenceBias              -20
+#rec.ConfidenceSigmoidSlope      20
+#rsc.BuildConfusionNetwork     true 
+#rec.CDConfidenceBias              -20
+#nrec.CDConfidenceSigmoidSlope      20
+#rec.PosteriorProbScale         0.5
+
+
+rec.UpdateLatticePostProcess         true
+rsc.BuildConfusionNetwork     true
+rsc.LogPOOV        0 
+rsc.PosteriorPruneThreshold     0
+
+# the rescoring LM
+
+
+
+rec.HTKLatticeFile PROCESS_IN_MEMORY
+
+
+
+krec.gmm_scale          0.1
+krec.nnet_scale         0.9
+krec.prior_scale        1.0
+krec.nnet_frame_batch   15
+krec.nnet_feature_name  filterbank
+krec.feat_scale         1.0
+
+######################################################################
+
+
+
+
+
+
+
+#############################
+kdata.hmm_model         ${DYNASPEAK_HOME}/DNN_Models/final.mdl
+kdata.nnet3_model       ${DYNASPEAK_HOME}/DNN_Models/final.mdl
+krec.num_mel_bins       40
+krec.dither             0.0
+### krec.frames_per_chunk	20
+
+# NOTE: Use a very long window to approximate speaker normalization.
+krec.cmvn_window                600
+krec.cmvn_speaker_frames        600
+krec.cmvn_global_frames         200
+krec.cmvn_normalize_mean TRUE
+krec.cmvn_normalize_variance FALSE
+# features are normalized by default
+kdata.cmvn_global_stats_rxfilename ${DYNASPEAK_HOME}/DNN_Models/cmvn_global_stats.bin
+
+### XXX
+krec.frame_subsampling_factor 3
+krec.feature_type	      mfcc
+krec.feature_add_pitch	      FALSE
+krec.feature_use_ivectors FALSE
+krec.num_mfcc		      40
+krec.mfcc_use_energy	      FALSE
+krec.mfcc_low_freq	      20
+krec.mfcc_high_freq	      -400
+
+
+# *** TURN THIS BACK ON IF YOU NEED WORD POSTERIORS, CONSENSUS RESULT, OR PASS2 KWS RESULTS ***
+
+# *** TURN THESE ON FOR WORD POSTERIORS ***
+# rec.UpdateLatticePostProcess TRUE
+# rsc.BuildConfusionNetwork  TRUE
+
+
+
+
+
+
+##########################################
+##
+## HCLG parameters:
+##
+# hclg decoding:
+kdata.word_symbol_table		${DYNASPEAK_HOME}/DNN_Models/words.txt
+kdata.phone_symbol_table	${DYNASPEAK_HOME}/DNN_Models/phones.txt
+kdata.HCLG			${DYNASPEAK_HOME}/Grammars/HCLG.fst
+
+# hclg recognition parameters
+#krec.acoustic_scale		0.1
+krec.acoustic_scale		1.0
+
+krec.lm_scale 7
+
+# logprob, so 1.0 is wtw=0
+krec.word_insertion_penalty	1.0
+
+# decoding options:
+krec.beam			10
+krec.max_active			3500
+krec.min_active			200
+
+# lattice generation options:
+# krec.lattice_beam should be less <= krec.beam!
+krec.lattice_beam		6.0
+# standard size:
+krec.max_mem			50000000
+# 2x:
+#krec.max_mem			100000000
+# 10x:
+#krec.max_mem			500000000
+
+# pushing:
+krec.push_strings		false
+krec.push_weights		false
+
+# word alignment
+kdata.WordBoundaryInfo		${DYNASPEAK_HOME}/DNN_Models/word_boundary.int
+# krec.align_max_expand	    	10
+
+# write compact lattices
+#krec.compact_lattice_wspecifier	ark,t:ds_lattices_8000_fast.clat
+
+##########################################
+
+# turn on partial results if 0
+#krec.partial_result_frames	50
+krec.partial_result_frames	0
+
+# set to 1 to compute lattices in partial result
+# set to 2 to determize lattices in partial result
+# set to 3 to align etc lattices in partial result
+krec.compute_partial_lattices	0
+# krec.compute_partial_lattices	2
+rec.PartialResultFormat		JSON
+
+# setting rec.PartialResultProperties will delete KWS output!
+#rec.PartialResultProperties	text tags confidence startFrame endFrame startMillis endMillis
+
+
+# rsc.rescoreLMFile ${DYNASPEAK_HOME}/Grammars/mix-all.5bo.1e-10.gz
+# rsc.LMOrder 5
+kdata.hmm_model          ${DYNASPEAK_HOME}/DNN_Models/final.mdl
+kdata.nnet3_model        ${DYNASPEAK_HOME}/DNN_Models/final.mdl
+krec.num_mel_bins        40
+
+
+##########################################
+##
+## HCLG parameters:
+##
+# hclg decoding:
+kdata.word_symbol_table  ${DYNASPEAK_HOME}/DNN_Models/words.txt
+kdata.phone_symbol_table ${DYNASPEAK_HOME}/DNN_Models/phones.txt
+kdata.HCLG               ${DYNASPEAK_HOME}/Grammars/HCLG.fst
+
+kdata.AffixGraph        ${DYNASPEAK_HOME}/Grammars/HCLG.affix.fst
+kdata.HFst              ${DYNASPEAK_HOME}/Grammars/Ha.fst
+kdata.ILabelInfo        ${DYNASPEAK_HOME}/Grammars/ilabels_2_1
+kdata.PhoneDisambiguationIndices        ${DYNASPEAK_HOME}/Grammars/disambig.int
+kdata.TransitionIdDisambiguationIndices ${DYNASPEAK_HOME}/Grammars/disambig_tid.int
+kdata.AddedWordWeight   -60.0
+rsc.AddedWordWeight   -60.0
+
+# turn on partial results if 0
+# krec.partial_result_frames     50
+krec.partial_result_frames       0
+
+# hclg recognition parameters
+krec.acoustic_scale              0.1
+
+krec.lm_scale 7
+
+# logprob, so 1.0 is wtw=0
+krec.word_insertion_penalty      1.0
+
+# decoding options:
+krec.beam                        9
+krec.max_active                  7000
+krec.min_active                  200
+
+# lattice generation options:
+# krec.lattice_beam should be less <= krec.beam!
+krec.lattice_beam                5.0
+krec.max_mem                     50000000
+
+krec.frame_subsampling_factor 3
+
+# pushing:
+krec.push_strings                false
+krec.push_weights                false
+
+# word alignment
+kdata.WordBoundaryInfo           ${DYNASPEAK_HOME}/DNN_Models/word_boundary.int
+# krec.align_max_expand          10
+
+# write compact lattices
+# krec.compact_lattice_wspecifier        ark,t:ds_lattices.clat
+
+##########################################
+
+

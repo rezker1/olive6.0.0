@@ -1,0 +1,9 @@
+{"English": ["asr-end2end-v1.0.1", "english-v1"],
+  "MandarinChinese": ["asr-end2end-v1.0.1", "mandarin-v1"],
+  "Persian": ["asr-end2end-v1.0.1", "farsi-v1"],
+  "Russian": ["asr-end2end-v1.0.1", "russian-v1"],
+  "Spanish": ["asr-end2end-v1.0.1", "spanish-v1"],
+  "French": ["asr-end2end-v1.0.1", "french-v1"],
+  "Pashto": ["asr-end2end-v1.0.1", "pashto-v1"],
+  "Arabic": ["asr-end2end-v1.0.1", "levantineArabic-v1"],
+  "Ukrainian": ["asr-end2end-v1.0.1", "ukrainian-v1"]}

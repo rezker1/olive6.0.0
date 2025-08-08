@@ -1,0 +1,63 @@
+{
+ "order": [
+  {
+   "workflow_type": "WORKFLOW_ANALYSIS_TYPE",
+   "job_definition": [
+    {
+     "job_name": "Speech Activity, Speaker Identification, Language Identification Analysis Workflow",
+     "tasks": [
+      {
+       "message_type": "REGION_SCORER_REQUEST",
+       "message_data": {
+        "plugin": "sad-dnn-commercial-v1.0.0",
+        "domain": "multi-v1"
+       },
+       "trait_output": "REGION_SCORER",
+       "task": "SAD",
+       "consumer_data_label": "audio",
+       "consumer_result_label": "SAD",
+       "return_result": true,
+       "description": "SAD"
+      },
+      {
+       "message_type": "GLOBAL_SCORER_REQUEST",
+       "message_data": {
+        "plugin": "lid-embed-commercial-v1.0.0",
+        "domain": "multi-v1"
+       },
+       "trait_output": "GLOBAL_SCORER",
+       "task": "LID",
+       "consumer_data_label": "audio",
+       "consumer_result_label": "LID",
+       "return_result": true,
+       "description": "Language ID"
+      },
+      {
+       "message_type": "GLOBAL_SCORER_REQUEST",
+       "message_data": {
+        "plugin": "sid-embed-commercial-v1.0.0",
+        "domain": "multi-v1"
+       },
+       "trait_output": "GLOBAL_SCORER",
+       "task": "SID",
+       "consumer_data_label": "audio",
+       "consumer_result_label": "SID",
+       "return_result": true,
+       "allow_failure": true,
+       "description": "Speaker ID"
+      }
+     ],
+     "data_properties": {
+      "min_number_inputs": 1,
+      "max_number_inputs": 1,
+      "type": "AUDIO",
+      "preprocessing_required": true,
+      "resample_rate": 8000,
+      "mode": "MONO"
+     }
+    }
+   ]
+  }
+ ],
+ "actualized": false
+}

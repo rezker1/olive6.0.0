@@ -1,0 +1,5 @@
+{"eng": ["asr-dynapy", "eng-tdnnChain-tel-v1"],
+  "cmn": ["asr-dynapy", "cmn-tdnnChain-tel-v1"],
+  "fas": ["asr-dynapy", "fas-tdnn-tel-v1"],
+  "rus": ["asr-dynapy", "rus-tdnnChain-tel-v1"],
+  "spa": ["asr-dynapy", "spa-tdnnChain-tel-v1"]}

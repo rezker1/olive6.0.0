@@ -1,0 +1,15 @@
+{"English": ["asr-end2end-v1.1.0", "english-v1"],
+  "Mandarin": ["asr-end2end-v1.1.0", "mandarin-v1"],
+  "Iranian Persian": ["asr-end2end-v1.1.0", "farsi-v1"],
+  "Russian": ["asr-end2end-v1.1.0", "russian-v1"],
+  "Spanish": ["asr-end2end-v1.1.0", "spanish-v1"],
+  "French": ["asr-end2end-v1.1.0", "french-v1"],
+  "Arabic": ["asr-end2end-v1.1.0", "levantineArabic-v1"],
+  "Modern Standard Arabic": ["asr-end2end-v1.1.0", "levantineArabic-v1"],
+  "Levantine Arabic": ["asr-end2end-v1.1.0", "levantineArabic-v1"],
+  "Iraqi Arabic": ["asr-end2end-v1.1.0", "iraqiArabic-v1"],
+  "Pashto": ["asr-end2end-v1.1.0", "pashto-v1"],
+  "Ukrainian": ["asr-end2end-v1.1.0", "ukrainian-v1"],
+  "Khmer": ["asr-end2end-v1.1.0", "khmer-augmented-v1"],
+  "Korean": ["asr-end2end-v1.1.0", "korean-augmented-v1"]
+}

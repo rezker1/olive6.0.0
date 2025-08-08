@@ -1,0 +1,3 @@
+{ "Mandarin": ["tmt-neural-v1.0.0", "cmn-eng-nmt-v1"],
+  "Russian": ["tmt-neural-v1.0.0", "rus-eng-nmt-v1"],
+  "Spanish": ["tmt-neural-v1.0.0", "spa-eng-nmt-v3"]}

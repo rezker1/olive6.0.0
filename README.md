@@ -49,9 +49,14 @@ OLIVE (Open Language Interface for Voice Exploitation) is a modular AI platform 
 - **OliveGUI/** - Nightingale Forensic GUI (optional)
 - **oliveAppData/** - Plugins, workflows, and data directories
 
-## Large Files
+## Docker Container
 
-The Docker container file `olive-martini-container-aiwdp-beta.rc3.tar` (16GB) is tracked with Git LFS but may require additional storage quota on GitHub.
+The Docker container file `olive-martini-container-aiwdp-beta.rc3.tar` (16GB) is not included in this repository due to size constraints. 
+
+To obtain the Docker container:
+- Contact the OLIVE team for access
+- Download from the official distribution channel
+- Request access through your organization's OLIVE contact
 
 ## License
 

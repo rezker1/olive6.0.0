@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Large binary files
+*.tar
+*.gz
+*.zip
+*.dmg
+*.iso
+*.jar
+
+# OLIVE specific
+oliveAppData/server/*.log
+oliveAppData/server/*.failed
+oliveAppData/tmp/
+oliveAppData/cache/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+
+# Java
+*.class
+*.jar
+target/
+build/
